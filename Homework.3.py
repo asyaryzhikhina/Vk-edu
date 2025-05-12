@@ -84,25 +84,25 @@ def is_tree(graph, start):
 import heapq
 
 def dijkstra(graph, start):
-    # Инициализация расстояний (бесконечность для всех вершин, кроме стартовой)
+    # инициализация расстояний (бесконечность для всех вершин, кроме стартовой)
     distances = {vertex: float('infinity') for vertex in graph}
     distances[start] = 0
     
-    # Приоритетная очередь (куча) для хранения (расстояние, вершина)
+    # приоритетная очередь (куча) для хранения (расстояние, вершина)
     priority_queue = [(0, start)]
     
     while priority_queue:
         current_distance, current_vertex = heapq.heappop(priority_queue)
         
-        # Пропускаем, если нашли более короткий путь до этой вершины
+        # пропускаем, если нашли более короткий путь до этой вершины
         if current_distance > distances[current_vertex]:
             continue
         
-        # Обновляем расстояния до всех соседей
+        # обновляем расстояния до всех соседей
         for neighbor, weight in graph[current_vertex].items():
             distance = current_distance + weight
             
-            # Если нашли более короткий путь до соседа
+            # если нашли более короткий путь до соседа
             if distance < distances[neighbor]:
                 distances[neighbor] = distance
                 heapq.heappush(priority_queue, (distance, neighbor))
